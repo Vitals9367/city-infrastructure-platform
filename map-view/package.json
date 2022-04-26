@@ -27,6 +27,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "lint": "eslint ./src/**/*.{tsx,ts}",
+    "validate-ts": "tsc --noEmit",
     "eject": "react-scripts eject",
     "prettier": "prettier \"src/**\" --write"
   },
