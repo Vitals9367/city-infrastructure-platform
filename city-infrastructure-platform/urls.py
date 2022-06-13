@@ -2,8 +2,8 @@ from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.urls import include, path, re_path
-from drf_yasg import openapi
-from drf_yasg.views import get_schema_view
+from drf_spectacular import openapi
+from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView, SpectacularRedocView
 from rest_framework import permissions, routers
 from rest_framework_nested.routers import NestedSimpleRouter
 
@@ -106,29 +106,29 @@ furniture_signpost_operations_router.register(
     basename="furniture-signpost-real-operations",
 )
 
-schema_view = get_schema_view(
-    openapi.Info(
-        title="City Infrastructure Platform REST API",
-        default_version="v1",
-        description="""
-            <b>Traffic Control devices</b>
+# schema_view = get_schema_view(
+#     openapi.Info(
+#         title="City Infrastructure Platform REST API",
+#         default_version="v1",
+#         description="""
+#             <b>Traffic Control devices</b>
 
-            Provides REST API for Traffic Control devices, such as Traffic Signs, Traffic Lights, Barriers,
-            SignPosts, Mounts and Road Markings.
+#             Provides REST API for Traffic Control devices, such as Traffic Signs, Traffic Lights, Barriers,
+#             SignPosts, Mounts and Road Markings.
 
-            These devices have planned and realized entities in the platform and therefore also equivalent
-            REST-endpoints.
+#             These devices have planned and realized entities in the platform and therefore also equivalent
+#             REST-endpoints.
 
-            Entity location output format can be controlled via "geo_format" GET-parameter.
-            Supported formats are ewkt and geojson. EWKT is the default format.
-        """,
-        terms_of_service="https://opensource.org/licenses/MIT",
-        license=openapi.License(name="MIT"),
-    ),
-    public=True,
-    permission_classes=(permissions.AllowAny,),
-    validators=["ssv"],
-)
+#             Entity location output format can be controlled via "geo_format" GET-parameter.
+#             Supported formats are ewkt and geojson. EWKT is the default format.
+#         """,
+#         terms_of_service="https://opensource.org/licenses/MIT",
+#         license=openapi.License(name="MIT"),
+#     ),
+#     public=True,
+#     permission_classes=(permissions.AllowAny,),
+#     validators=["ssv"],
+# )
 
 urlpatterns = [
     path("ha/", include("helusers.urls", namespace="helusers")),
@@ -143,9 +143,9 @@ urlpatterns = [
     path("v1/", include(furniture_signpost_operations_router.urls)),
     path("auth/", include("social_django.urls", namespace="social")),
     path("wfs/", CityInfrastructureWFSView.as_view(), name="wfs-city-infrastructure"),
-    re_path(r"^swagger(?P<format>\.json|\.yaml)$", schema_view.without_ui(cache_timeout=0), name="schema-json"),
-    re_path(r"^swagger/$", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
-    re_path(r"^redoc/$", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
+    re_path(r"^swagger(?P<format>\.json|\.yaml)$", SpectacularAPIView.as_view(), name="schema-json"),
+    re_path(r"^swagger/$", SpectacularSwaggerView.as_view(url_name="schema-swagger-ui"), name="schema-swagger-ui"),
+    re_path(r"^redoc/$", SpectacularRedocView.as_view(), name="schema-redoc"),
 ]
 
 if settings.SENTRY_DEBUG:
