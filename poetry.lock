@@ -546,6 +546,7 @@ description = "Sane and flexible OpenAPI 3 schema generation for Django REST fra
 category = "main"
 optional = false
 python-versions = ">=3.6"
+develop = false
 
 [package.dependencies]
 Django = ">=2.2"
@@ -559,6 +560,12 @@ uritemplate = ">=2.0.0"
 [package.extras]
 offline = ["drf-spectacular-sidecar"]
 sidecar = ["drf-spectacular-sidecar"]
+
+[package.source]
+type = "git"
+url = "https://github.com/tfranzel/drf-spectacular.git"
+reference = "df9e115ca9b9a3ec84d60df942be28ce3cda13fa"
+resolved_reference = "df9e115ca9b9a3ec84d60df942be28ce3cda13fa"
 
 [[package]]
 name = "ecdsa"
@@ -1565,7 +1572,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "f8826efdcd49a96d58108f57d30985235d7339c4a223875a9e0c9c0165fd0b1b"
+content-hash = "d0578661cc1250d6fb979f088fd7a1c9ba451a47f152d1650e9b2ed1fba9acf9"
 
 [metadata.files]
 appnope = [
@@ -1867,10 +1874,7 @@ drf-nested-routers = [
 drf-oidc-auth = [
     {file = "drf-oidc-auth-2.0.0.tar.gz", hash = "sha256:dee7dc4e5a6de2d78a2e2de2468b961c6f928618015ed4302c5392a33d0114aa"},
 ]
-drf-spectacular = [
-    {file = "drf-spectacular-0.22.1.tar.gz", hash = "sha256:866e16ddaae167a1234c76cd8c351161373551db994ce9665b347b32d5daf38b"},
-    {file = "drf_spectacular-0.22.1-py3-none-any.whl", hash = "sha256:17ac5e31e5d6150dd5fa10843b429202f4f38069202acc44394cc5a771de63d9"},
-]
+drf-spectacular = []
 ecdsa = [
     {file = "ecdsa-0.17.0-py2.py3-none-any.whl", hash = "sha256:5cf31d5b33743abe0dfc28999036c849a69d548f994b535e527ee3cb7f3ef676"},
     {file = "ecdsa-0.17.0.tar.gz", hash = "sha256:b9f500bb439e4153d0330610f5d26baaf18d17b8ced1bc54410d189385ea68aa"},

@@ -1,20 +1,21 @@
-from drf_spectacular import openapi
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import OpenApiParameter
 from rest_framework import serializers
 
-location_parameter = openapi.AutoSchema(
-    # "location",
-    # openapi.IN_QUERY,
-    # type=openapi.TYPE_STRING,
-    # description="Location (2D or 3D) to search from in WKT-format (EPSG:3879)",
+
+location_parameter = OpenApiParameter(
+    "location",
+    OpenApiTypes.STR,
+    description="Location (2D or 3D) to search from in WKT-format (EPSG:3879)",
+    # TODO:
     # format="WKT",
 )
 
-file_uuid_parameter = openapi.AutoSchema(
-    # "file_pk",
-    # openapi.IN_PATH,
-    # type=openapi.TYPE_STRING,
-    # format=openapi.FORMAT_UUID,
-    # description="File object UUID",
+file_uuid_parameter = OpenApiParameter(
+    "file_pk",
+    OpenApiTypes.UUID,
+    location=OpenApiParameter.PATH,
+    description="File object UUID",
 )
 
 

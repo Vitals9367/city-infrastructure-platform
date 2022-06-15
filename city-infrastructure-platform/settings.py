@@ -269,7 +269,15 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 20,
     "OIDC_LEEWAY": env("TOKEN_AUTH_MAX_TOKEN_AGE"),
     "GROUP_CLAIM_NAME": "groups",
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
+
+SPECTACULAR_SETTINGS = {
+    "ENUM_NAME_OVERRIDES": {
+        # "TrafficLightSoundBeaconValue": "traffic_control.models.traffic_light.TrafficLightSoundBeaconValue",
+    },
+}
+
 
 # django-cors
 if DEBUG:

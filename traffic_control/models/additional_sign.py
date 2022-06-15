@@ -57,6 +57,7 @@ class AbstractAdditionalSign(SourceControlModel, SoftDeleteModel, UserControlMod
         blank=True,
         null=True,
     )
+    # TODO    color = models.CharField("Color", max_length=50)
     color = EnumIntegerField(Color, verbose_name=_("Color"), default=Color.BLUE, blank=True, null=True)
     mount_type = models.ForeignKey(
         MountType,

@@ -143,9 +143,9 @@ urlpatterns = [
     path("v1/", include(furniture_signpost_operations_router.urls)),
     path("auth/", include("social_django.urls", namespace="social")),
     path("wfs/", CityInfrastructureWFSView.as_view(), name="wfs-city-infrastructure"),
-    re_path(r"^swagger(?P<format>\.json|\.yaml)$", SpectacularAPIView.as_view(), name="schema-json"),
-    re_path(r"^swagger/$", SpectacularSwaggerView.as_view(url_name="schema-swagger-ui"), name="schema-swagger-ui"),
-    re_path(r"^redoc/$", SpectacularRedocView.as_view(), name="schema-redoc"),
+    re_path(r"^schema/$", SpectacularAPIView.as_view(), name="schema-json"),
+    re_path(r"^swagger/$", SpectacularSwaggerView.as_view(url_name="schema-json"), name="schema-swagger-ui"),
+    re_path(r"^redoc/$", SpectacularRedocView.as_view(url_name="schema-json"), name="schema-redoc"),
 ]
 
 if settings.SENTRY_DEBUG:

@@ -11,7 +11,19 @@ from traffic_control.models import (
     OperationType,
     TrafficControlDeviceType,
 )
-from traffic_control.models.additional_sign import AdditionalSignRealOperation
+from traffic_control.models.additional_sign import AdditionalSignRealOperation, Color
+from drf_spectacular.utils import extend_schema_field
+
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.extensions import OpenApiSerializerFieldExtension
+from drf_spectacular.plumbing import build_basic_type
+
+
+class Fix1(OpenApiSerializerFieldExtension):
+    target_class = "rest_framework_gis.fields.GeometryField"
+
+    def map_serializer_field(self, auto_schema, direction):
+        return build_basic_type(OpenApiTypes.STR)
 
 
 class WritableNestedContentSerializerMixin:
@@ -209,6 +221,7 @@ class AdditionalSignRealSerializer(
 ):
     content = NestedAdditionalSignContentRealSerializer(many=True, required=False)
     operations = AdditionalSignRealOperationSerializer(many=True, required=False, read_only=True)
+    color = "väri"
 
     class Meta:
         model = AdditionalSignReal
